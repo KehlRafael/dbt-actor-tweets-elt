@@ -1,0 +1,42 @@
+version: 2
+
+models:
+  - name: stg_actors
+    columns: 
+      - name: nconst
+        tests:
+          - unique
+          - not_null
+  - name: stg_tweets
+    columns: 
+      - name: id
+        tests:
+          - unique
+          - not_null
+      - name: twitter_user
+        tests:
+          - not_null
+      - name: nconst
+        tests:
+          - relationships:
+              to: ref('stg_actors')
+              field: nconst
+  - name: stg_tweets_user
+    columns:
+      - name: username
+        tests:
+          - not_null
+      - name: user_id
+        tests:
+          - not_null
+      - name: followers_count
+        tests:
+          - not_null
+      - name: following_count
+        tests:
+          - not_null
+      - name: nconst
+        tests:
+          - relationships:
+              to: ref('stg_actors')
+              field: nconst

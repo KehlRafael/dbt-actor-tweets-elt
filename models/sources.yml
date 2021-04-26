@@ -1,0 +1,34 @@
+version: 2
+
+sources:
+  - name: local
+    description: Postgres Db with all actors and tweets schemas and tables.
+    database: actortweets
+    schema: dev
+    tables:
+      - name: actors
+        description: Actors that did the most movies in the last 10 years.
+        columns:
+          - name: nconst
+            description: IMDb actor unique id.
+            tests:
+              - not_null
+          - name: id
+            description: Serial pk id from Postgres.
+            tests:
+              - unique
+              - not_null
+          - name: when_checked
+            description: Date that this data was collected.
+      - name: tweets
+        description: Data returned by the twitter API from a recent search.
+        columns:
+          - name: nconst
+            description: IMDb actor unique id.
+            tests:
+              - not_null
+          - name: id
+            description: Tweet unique id.
+            tests:
+              - unique
+              - not_null
